@@ -1,29 +1,20 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
 
-function App(): JSX.Element {
+const Stack = createNativeStackNavigator();
+
+function App(){
   return (
-    <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.container}>
-          <Text>Coding Challinge - PAID</Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
 
 export default App;
