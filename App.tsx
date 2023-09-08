@@ -1,29 +1,30 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
+import NewsScreen from './src/screens/NewsScreen';
+import {Provider} from 'react-redux';
+import {store} from './src/store';
+import { News } from './src/feature/newsSlice';
 
-function App(): JSX.Element {
+export type RootStackParamList = {
+  Home: undefined;
+  News: {article: News};
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function App() {
   return (
-    <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.container}>
-          <Text>Coding Challinge - PAID</Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Provider store={store}>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="News" component={NewsScreen} />
+        </Stack.Navigator>
+      </Provider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
