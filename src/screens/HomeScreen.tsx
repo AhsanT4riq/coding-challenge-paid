@@ -26,13 +26,17 @@ const HomeScreen: FC<HomeScreenProps> = () => {
   }, []);
 
   //Fetching News articles on Return
-  const fetchNews = async () => {
-    dispatch(clearState());
-    dispatch(getArticles(searchTerm));
+  const fetchNews = async (term: string) => {
+    await dispatch(clearState());
+    await dispatch(getArticles(term));
   };
 
-  const setSearchTerm = (term: string) => {
-    dispatch(updateSearchTerm(term));
+  const setSearchTerm = async (term: string) => {
+    await dispatch(updateSearchTerm(term));
+  };
+
+  const closeModal = async () => {
+    await dispatch(clearState());
   };
 
   return (
@@ -58,7 +62,7 @@ const HomeScreen: FC<HomeScreenProps> = () => {
       <ErrorModal
         searchTerm={searchTerm}
         isVisible={totalResults === 0}
-        onClose={() => dispatch(clearState())}
+        onClose={() => closeModal()}
       />
     </SafeAreaView>
   );

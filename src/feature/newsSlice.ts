@@ -66,10 +66,10 @@ export const newsSlice = createSlice({
         builder.addCase(getArticles.fulfilled, (state, action) => {
             const history = [...state.searchHistory];
             const index = history.findIndex(term => term.toLocaleLowerCase() === state.searchTerm.toLocaleLowerCase())
-            if (history.length === 4 && index === -1) {
+            if (history.length === 4 && index === -1 && state.searchTerm !== '') {
                 history.pop();
                 history.unshift(state.searchTerm);
-            } else if (index === -1) {
+            } else if (index === -1 && state.searchTerm !== '') {
                 history.unshift(state.searchTerm);
             }
             state.searchHistory = history;

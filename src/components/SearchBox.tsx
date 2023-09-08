@@ -13,7 +13,7 @@ import {RootState} from '../store';
 type SearchBoxProps = {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-  fetchNews: () => Promise<void>;
+  fetchNews: (term: string) => Promise<void>;
 };
 
 const SearchBox: React.FC<SearchBoxProps> = ({
@@ -29,7 +29,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   };
   const selectHistory = (term: string) => {
     setSearchTerm(term);
-    fetchNews();
+    fetchNews(term);
     textInputRef.current?.blur();
   };
   return (
@@ -43,7 +43,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
           keyboardType="default"
           value={searchTerm}
           onChangeText={text => setSearchTerm(text)}
-          onSubmitEditing={() => fetchNews()}
+          onSubmitEditing={() => fetchNews(searchTerm)}
           onFocus={() => showSearchHistory(true)}
           onBlur={() => showSearchHistory(false)}
           blurOnSubmit={true}

@@ -15,7 +15,7 @@ const NewsList: React.FC<NewsListProps> = ({navigation, news}) => {
     <ScrollView
       contentContainerStyle={styles.content}
       contentInsetAdjustmentBehavior="automatic">
-      {news.length
+      {news?.length
         ? news.map((article: News, index: number) => (
             <NewsItem key={index} navigation={navigation} article={article} />
           ))
